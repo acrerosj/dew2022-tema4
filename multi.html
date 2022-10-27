@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+
+</head>
+<body>
+  <h1>Calculadora</h1>
+  <p><input type="number"></p> 
+  <p><input type="number"></p>
+  <p><button onclick="sumar()">Sumar</button></p>
+  <p><button onclick="multiplicar()">Multiplicar</button></p>
+  <p><strong>--</strong></p>
+
+  <script>
+    let operadores = document.querySelectorAll('input');
+    let op1 = operadores[0];
+    let op2 = operadores[1];
+    let solucion = document.querySelector('strong');
+
+    function multiplicar() {
+      // No es obligatorio convertir a Number ya que lo hace JS
+      solucion.textContent =  Number(op1.value) * Number(op2.value);
+    }
+
+    function sumar() {
+      // Es obligatorio convertir a Number para evitar la concatenación.
+      solucion.textContent =  Number(op1.value) + Number(op2.value);
+    }
+
+  </script> 
+</body>
+</html>
