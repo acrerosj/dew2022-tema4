@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego XO</title>
+</head>
+<body>
+  <h1>Juego X-0</h1>
+  <table border="1"></table>
+  <button onclick="countX()">Contar</button>
+  <script>
+    let rows=4, columns=5;
+/*    do {
+      rows = parseInt(prompt('Número de filas: '));
+      columns = parseInt(prompt('Número de columnas:'));
+    } while (rows<=0 || columns<=0);
+*/  
+
+    const table = document.querySelector('table');
+
+    for(let i=0; i<rows; i++) {
+      const row = document.createElement('tr');
+      table.appendChild(row);
+      for(let j=0; j<columns; j++) {
+        const cell = document.createElement('td');
+        cell.textContent = Math.floor(Math.random()*2) ? '0' : 'X';
+        cell.setAttribute('onclick', 'change(this)');
+        row.appendChild(cell);
+      }    
+    }
+    checkRows();  
+
+    function countX() {
+      const cells = document.querySelectorAll('td');
+      const equis = [...cells].filter(c => c.textContent=='X');
+      console.log(equis.length);
+    }
+
+    function change(cell) {
+      cell.textContent = cell.textContent=='X' ? '0' : 'X';
+      checkRows();
+      //cell.parentElement.remove();
+    }
+
+    function checkRows() {
+      const rows = table.querySelectorAll('tr');
+      [...rows].forEach(r => {
+        const first = r.firstElementChild.textContent;
+        const value = [...r.childNodes].every(c => c.textContent == first);
+        console.log(value);
+        if (value) r.remove();
+      });
+    }
+  </script>
+</body>
+</html>
