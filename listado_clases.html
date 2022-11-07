@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .green {color: green}
+    .bold {font-weight: bold;}
+    .selected {background-color: yellow;}
+  </style>
+</head>
+<body>
+  <h1>Pruebas con classlist</h1>
+  <ul></ul>
+  <p><button onclick="deleteLi()">Borrar seleccionados</button></p>
+  <script>
+    let list = document.querySelector('ul');
+    let products = ['manzana', 'pera', 'uva', 'naranja', 'sandía'];
+    products.forEach(p=>{
+      let li = document.createElement('li');
+      li.textContent = p;
+      li.className = "green";
+      li.setAttribute('onclick', "selectLi(this)");
+      if (p.length>4) li.classList.add("bold");
+      list.appendChild(li);
+    })
+
+    function selectLi(elem) {
+      // if (elem.classList.contains('selected')) {
+      //   elem.classList.remove('selected');  
+      // } else {
+      //   elem.classList.add('selected');
+      // }
+      elem.classList.toggle('selected');
+    }
+
+    function deleteLi() {
+      let selected = document.querySelectorAll('li.selected');
+      [...selected].forEach(li => li.remove());
+      //console.log(selected);
+      //list.append(...selected);
+    }
+  </script>
+</body>
+</html>
