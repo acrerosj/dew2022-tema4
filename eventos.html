@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button 
+    onclick="console.log('pulsar')"
+    ondblclick="console.log('dobleclick    ')"
+    onmouseover="console.log('ratón encima')"
+    onmousedown="console.log('pulsando')"
+    onmouseup="console.log('soltar')"
+  >Pulsar</button>
+  <p>
+    <input type="text" name="" id="" tabindex="1" 
+      onfocus="borrar(this)"
+      onblur="borrar(this)"
+      >
+  </p>
+  <p>
+    <button id="btn2">boton 2</button>
+  </p>
+  <div onclick="mostrar2(this)">
+    <p>Esto es un texto</p>
+    <p onclick="mostrar2(this)">Pulsa <span onclick="mostrar2(this)">aquí</span></p>
+  </div>
+  <p>
+    <button id="btn3">boton 3</button>
+  </p>
+  <div id="div1">
+    <h1>Event Listener</h1>
+    <p>
+      <button id="btn4">boton 4</button>
+    </p>
+  </div>
+
+  <script>
+    function borrar(elem) { 
+      console.log(elem);
+      elem.value = "";
+    }
+
+    const btn2 = document.getElementById('btn2');
+    btn2.onclick = function() {
+      console.log('soy boton 2');
+      console.log(this);
+    }
+
+    btn2.onmouseover = mostrar;
+
+    btn2.ondblclick = () => console.log('doble click');
+    
+    function mostrar() {
+      console.log('mostrando: ', this);
+    }
+
+    function mostrar2(elem) {
+      console.log('mostrando: ', elem);
+    }
+
+    const f1 = () => console.log('función 1');
+    const f2 = () => console.log('función 2');
+    const f3 = () => console.log('función 3');
+    const btn3 = document.getElementById('btn3');
+
+    const funcs = [f1, f2, f3];
+    funcs.forEach(f => btn3.addEventListener('click',f));
+
+    const show = (event) => event.currentTarget.remove();
+    const show2 = (event) => console.log('funcion show2', event.target);
+    const div1 = document.getElementById('div1');
+    div1.addEventListener('click', show);
+    const btn4 = document.getElementById('btn4');
+    btn4.addEventListener('click', show2);
+
+  </script>
+</body>
+</html>
