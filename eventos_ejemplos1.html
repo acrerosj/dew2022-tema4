@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eventos</title>
+</head>
+<body>
+  <h1>Ejemplo Eventos</h1>
+  <p>Observa el console</p>
+  <p>
+    <button id="btn1">boton 1</button>
+  </p>
+  <p>
+    Pasa por encima para aumentar el contador: <span id="counter">0</span>
+  </p>
+  <p>
+    <button id="btn3">boton 3</button>
+  </p>
+  <script>
+    const btn1 = document.getElementById('btn1');
+    btn1.addEventListener('click', ()=>console.log('Pulsado'));
+
+    const counter = document.getElementById('counter');
+    counter.addEventListener('mouseover', (e) => e.target.textContent++);
+
+    const btn3 = document.getElementById('btn3');
+    btn3.addEventListener('click', (e) => {
+      let buttons = [];
+      if (e.altKey) buttons.push('Alt');
+      if (e.ctrlKey) buttons.push('Ctrl');
+      if (e.shiftKey) buttons.push('Key');
+      console.log("Pulsando: " + buttons.join('+'));
+    })
+  </script>
+</body>
+</html>

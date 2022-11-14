@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pintar Cuadro</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+      width: 700px;
+      height: 500px;
+      box-shadow: 10px 15px 15px gray;
+      margin: 0px auto;
+      position: relative;
+    }
+
+    .c {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pintar Cuadro</h1>
+  <div id="canvas"></div>
+  <script>
+    let x, y;
+    const canvas = document.getElementById('canvas');
+    canvas.addEventListener('mousedown', coordenadas);
+    canvas.addEventListener('mouseup', pintar);
+
+    function coordenadas(e) {
+      x = e.offsetX;
+      y = e.offsetY;
+    }
+
+    function pintar(e) {
+      let xF = e.offsetX;
+      let yF = e.offsetY;
+      [x,xF] = (x<xF) ? [x,xF] : [xF,x];
+      [y,yF] = (y<yF) ? [y,yF] : [yF,y];
+      console.log(x, y, xF, yF);
+      let box = document.createElement('div');
+      box.className = 'c';
+      console.log(box.clientTop);
+      //box.clientTop = y;
+      let width = xF - x;
+      let height = yF - y;
+      box.style = "top: "+y+"px; left: "+x+"px; height: " + height + "px; width: "+ width + "px;";
+      console.log(box.clientTop);
+      canvas.appendChild(box);
+    }
+  </script>
+</body>
+</html>

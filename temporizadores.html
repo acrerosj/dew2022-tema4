@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    meter {
+      width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Temporizadores</h1>
+  <p>
+    <button>Pulsar para poner hola a los 5 seg.</button>
+    <span id="contenido1">--</span>
+  </p>
+  <p>
+    <button>Abortar</button>
+  </p>
+  <p>
+    Contador: <span id="contador">0</span>
+  </p>
+  <p>
+    <button>Parar tiempo</button>
+    <button>Arrancar</button>
+  </p>
+  <p>
+    <meter id="barra" value="100" max="100" low="30"></meter>
+    <button id="btn-barra">Arrancar</button>
+  </p>
+  <script>
+    const btn1 = document.querySelector('button');
+    const contenido1 = document.getElementById('contenido1');
+    const btn2 = document.querySelectorAll('button')[1];
+    let id;
+    function pararMensaje() {
+      console.log("ejecutada pararMensaje");
+      clearTimeout(id);
+    }
+    btn1.addEventListener('click', ()=>{
+      id = setTimeout(()=>{
+        contenido1.textContent = "hola";
+      },3000);
+    });
+    btn2.addEventListener('click', pararMensaje);
+
+    const contador = document.querySelector('#contador');
+    let id2;
+
+    const btn3 = document.querySelectorAll('button')[2];
+    btn3.addEventListener('click', () => {
+      clearInterval(id2);
+      id2 = undefined;
+    });
+
+    const btn4 = document.querySelectorAll('button')[3];
+    btn4.addEventListener('click', ()=>{
+      if (id2==undefined) {
+        id2 = setInterval( () => contador.textContent++, 1000);
+      }
+    });
+
+    const barra = document.getElementById('barra');
+    const btnBarra = document.getElementById('btn-barra');
+    btnBarra.addEventListener('click', arrancar);
+    let id3;
+    function arrancar() {
+      if (barra.value==0) barra.value=100;
+      id3 = setInterval( ()=> {
+        barra.value--;
+        console.log(barra.value);
+        if (barra.value==0) parar();
+      }, 100);
+      btnBarra.textContent = "Parar";
+      btnBarra.removeEventListener('click', arrancar);
+      btnBarra.addEventListener('click', parar);
+    }
+
+    function parar() {
+      clearInterval(id3);
+      btnBarra.textContent = "Arrancar";
+      btnBarra.removeEventListener('click', parar);
+      btnBarra.addEventListener('click', arrancar);
+    }
+</script>
+</body>
+</html>
