@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #bola {
+      position: absolute;
+      background-color: blue;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div id="bola"></div>
+  <script>
+    const bola = document.querySelector('#bola');
+    bola.style.top = "0px";
+    bola.style.left = "0px";
+    bola.style.width = "200px";
+    bola.style.height = "200px";
+
+    let dx = 1;
+    let dy = 1;
+   
+    function move() {
+      let x = parseInt(bola.style.left);
+      let y = parseInt(bola.style.top);
+
+      if (x + dx > window.innerWidth - parseInt(bola.style.width)) dx = -1;
+      if (y + dy > window.innerHeight - parseInt(bola.style.height)) dy = -1;
+      if (x + dx < 0) dx = 1;
+      if (y + dy < 0) dy = 1;
+
+      bola.style.left = x + dx + "px";
+      bola.style.top = y + dy + "px";
+    }
+
+    setInterval(move, 2);
+
+    bola.addEventListener('mouseover', (e)=> {
+      console.log(e.target);
+      let bola = e.target;
+      let diametro = parseInt(bola.style.width);
+      diametro -= 10;
+      bola.style.width = diametro + "px";
+      bola.style.height = diametro + "px";
+    });
+  </script>
+</body>
+</html>
